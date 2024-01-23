@@ -11,7 +11,7 @@ public interface FeeService {
 
     Optional<FeeDTO> getFeeById(Long id);
 
-    void createFee(FeeDTO feeDTO);
+    void configureFee(FeeDTO feeDTO);
 
     Optional<FeeDTO> updateFee(FeeDTO feeDTO);
 

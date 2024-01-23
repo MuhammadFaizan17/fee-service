@@ -34,8 +34,8 @@ public class FeeController {
 
     @PostMapping
     @Operation(summary = "Configure Fee", description = "configure fee against grade (G1 to G10)")
-    public ResponseEntity<FeeDTO> createFee(@Valid @RequestBody FeeDTO feeDTO) {
-        feeService.createFee(feeDTO);
+    public ResponseEntity<FeeDTO> configureFee(@Valid @RequestBody FeeDTO feeDTO) {
+        feeService.configureFee(feeDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

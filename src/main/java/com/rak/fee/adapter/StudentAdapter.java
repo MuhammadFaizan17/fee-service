@@ -20,16 +20,22 @@ public class StudentAdapter {
     @Value("${student.service.url}")
     private String studentServiceUrl;
 
-    public SchoolDTO getSchoolById(Long schoolId) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(studentServiceUrl + "/schools/" + schoolId);
-        try {
-            log.info("Calling student service:{}", builder.toUriString());
-            ResponseEntity<SchoolDTO> responseEntity = restTemplate.getForEntity(builder.toUriString(), SchoolDTO.class);
-            return responseEntity.getBody();
-        } catch (RestClientException e) {
-            log.error("Error occurred while saving user on admin: {}", e.getMessage());
-            throw (e);
-        }
+   /**
+ * Retrieves a SchoolDTO object by its ID from the student service.
+ * @param schoolId the ID of the school to retrieve
+ * @return the SchoolDTO object retrieved from the student service
+ * @throws RestClientException if an error occurs while retrieving the school
+ */
+public SchoolDTO getSchoolById(Long schoolId) {
+    UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(studentServiceUrl + "/schools/" + schoolId);
+    try {
+        log.info("calling student service:{}", builder.toUriString());
+        ResponseEntity<SchoolDTO> responseEntity = restTemplate.getForEntity(builder.toUriString(), SchoolDTO.class);
+        return responseEntity.getBody();
+    } catch (RestClientException e) {
+        log.error("Error occurred while saving user on admin: {}", e.getMessage());
+        throw (e);
     }
+}
 
 }

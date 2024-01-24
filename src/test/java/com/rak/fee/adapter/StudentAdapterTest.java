@@ -41,21 +41,16 @@ public class StudentAdapterTest {
         ResponseEntity<SchoolDTO> responseEntity = new ResponseEntity<>(expectedSchool, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(SchoolDTO.class))).thenReturn(responseEntity);
 
-        // Act
         SchoolDTO actualSchool = studentAdapter.getSchoolById(schoolId);
 
-        // Assert
         assertEquals(expectedSchool, actualSchool);
         verify(restTemplate, times(1)).getForEntity(anyString(), eq(SchoolDTO.class));
     }
 
     @Test
     void getSchoolByIdRestClientException() {
-        // Arrange
         Long schoolId = 1L;
         when(restTemplate.getForEntity(anyString(), eq(SchoolDTO.class))).thenThrow(new RestClientException("Error"));
-
-        // Act and Assert
         assertThrows(RestClientException.class, () -> studentAdapter.getSchoolById(schoolId));
         verify(restTemplate, times(1)).getForEntity(anyString(), eq(SchoolDTO.class));
     }

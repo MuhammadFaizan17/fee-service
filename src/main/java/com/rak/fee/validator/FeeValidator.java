@@ -22,18 +22,18 @@ public class FeeValidator implements Validator<Fee, FeeDTO> {
 
     }
 
-/**
- * Validates the fee data transfer object (DTO).
- * Throws an exception if the DTO is invalid.
- */
-@Override
-public void validateDTO(FeeDTO feeDTO) {
-    if (!Grade.isValid(feeDTO.getGrade()))
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid grade value must be like G1 to G10");
-    if (feeDTO.getAmount() < 10)
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "amount must be greater than or equal to 10 AED");
-    if (studentAdapter.getSchoolById(feeDTO.getSchoolId()) == null) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "school not found with schoolId: " + feeDTO.getSchoolId());
+    /**
+     * Validates the fee data transfer object (DTO).
+     * Throws an exception if the DTO is invalid.
+     */
+    @Override
+    public void validateDTO(FeeDTO feeDTO) {
+        if (!Grade.isValid(feeDTO.getGrade()))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid grade value must be like G1 to G10");
+        if (feeDTO.getAmount() < 10)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "amount must be greater than or equal to 10 AED");
+        if (studentAdapter.getSchoolById(feeDTO.getSchoolId()) == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "school not found with schoolId: " + feeDTO.getSchoolId());
+        }
     }
-}
 }

@@ -36,49 +36,49 @@ public class FeeControllerTest {
 
     @Test
     void getAllFees() {
-        
+
         List<FeeDTO> expectedFees = new ArrayList<>();
         expectedFees.add(new FeeDTO());
         expectedFees.add(new FeeDTO());
         when(feeService.getAllFees()).thenReturn(expectedFees);
 
-        
+
         List<FeeDTO> actualFees = feeController.getAllFees();
 
-        
+
         assertNotNull(actualFees);
         assertEquals(expectedFees.size(), actualFees.size());
     }
 
     @Test
     void createFee() {
-        
+
         FeeDTO feeDTO = new FeeDTO();
 
-        
+
         ResponseEntity<FeeDTO> responseEntity = feeController.configureFee(feeDTO);
 
-        
+
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
     }
 
     @Test
     void updateFee() {
-        
+
         FeeDTO feeDTO = new FeeDTO();
         when(feeService.updateFee(feeDTO)).thenReturn(Optional.of(feeDTO));
 
-        
+
         ResponseEntity<FeeDTO> responseEntity = feeController.updateFee(feeDTO);
 
-        
+
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(feeDTO, responseEntity.getBody());
     }
 
     @Test
     void updateFeeShouldThrowExceptionWhenFeeNotFound() {
-        
+
         FeeDTO feeDTO = new FeeDTO();
         when(feeService.updateFee(feeDTO)).thenReturn(Optional.empty());
 
@@ -87,16 +87,16 @@ public class FeeControllerTest {
 
     @Test
     void getFeeByGradeAndSchoolId() {
-        
+
         Grade grade = Grade.G1;
         Long schoolId = 1L;
         FeeDTO expectedFee = new FeeDTO();
         when(feeService.findByGradeAndSchoolId(grade.getGrade(), schoolId)).thenReturn(expectedFee);
 
-        
+
         FeeDTO actualFee = feeController.getFeeByGrade(grade, schoolId);
 
-        
+
         assertNotNull(actualFee);
         assertEquals(expectedFee, actualFee);
     }
